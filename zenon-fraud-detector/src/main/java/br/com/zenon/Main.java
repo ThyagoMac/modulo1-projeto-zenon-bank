@@ -30,5 +30,11 @@ public class Main {
 
         IO.println(transaction1);
         IO.println(transaction2);
+        IO.println("--------------------------------");
+        IO.println("Lendo arquivo de transações...");
+        IO.println(TransactionIngestor.read("zenon-fraud-detector/data/PS_20174392719_1491204439457_log.csv", true, 10));
+        IO.println("--------------------------------");
+        IO.println("Lendo arquivo de transações com BufferedReader...");
+        IO.println(TransactionIngestor.readBufferedReader("zenon-fraud-detector/data/PS_20174392719_1491204439457_log.csv", true, 10));
     }
 }
