@@ -4,6 +4,7 @@ import java.math.BigDecimal;
 
 public class Main {
     void main(String[] args) {
+        /*
         var transaction1 = new Transaction(1,
             TransactionType.PAYMENT,
             new BigDecimal("9839.64"),
@@ -28,13 +29,17 @@ public class Main {
         true,
         false);
 
+        
         IO.println(transaction1);
         IO.println(transaction2);
         IO.println("--------------------------------");
         IO.println("Lendo arquivo de transações...");
         IO.println(TransactionIngestor.read("zenon-fraud-detector/data/PS_20174392719_1491204439457_log.csv", true, 10));
+        */
         IO.println("--------------------------------");
-        IO.println("Lendo arquivo de transações com BufferedReader...");
-        IO.println(TransactionIngestor.readBufferedReader("zenon-fraud-detector/data/PS_20174392719_1491204439457_log.csv", true, 10));
+        IO.println("Lendo arquivo de transações com erros...");
+        var transactions = TransactionIngestor.read("zenon-fraud-detector/data/paysim_with_bad_data.csv", true, 16);
+        IO.println("Quantidade de transações: " + transactions.size());
+        transactions.forEach(IO::println);
     }
 }
