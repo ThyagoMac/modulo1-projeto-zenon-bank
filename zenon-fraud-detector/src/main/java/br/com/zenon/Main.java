@@ -48,7 +48,7 @@ public class Main {
 
         IO.println("2. Top 3 Fraudes de maior valor amount: ");
         var top3FraudesAmount = FraudAnalyzer.getTopFraudes(fraudTransactions, 3).stream().map(Transaction::amount).toList();
-        top3FraudesAmount.forEach(amount -> IO.println(amount.toPlainString()));
+        top3FraudesAmount.forEach(amount -> IO.println("%.2f".formatted(amount)));
 
         IO.println("3. Top 5 Clientes Suspeitos: ");
         var top5SuspiciousCustomers = FraudAnalyzer.getTopSuspiciousCustomers(fraudTransactions, 5).stream().map(Transaction::origin).toList();
