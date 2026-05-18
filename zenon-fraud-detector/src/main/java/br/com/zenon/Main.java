@@ -41,6 +41,7 @@ public class Main {
         IO.println("Quantidade de transações: " + transactions.size());
         transactions.forEach(IO::println);
         */
+        /* 
         var transactions = TransactionIngestor.read("zenon-fraud-detector/data/PS_20174392719_1491204439457_log.csv", true, 50000);
         var fraudTransactions = FraudAnalyzer.analyze(transactions);
 
@@ -59,5 +60,26 @@ public class Main {
         IO.println("5. Fraudes por tipo: ");
         var fraudsByType = FraudAnalyzer.getFraudsByType(fraudTransactions);
         fraudsByType.forEach((type, transactionsType) -> IO.println(" - " + type + ": " + transactionsType.size()));
+        */
+        var transactions = TransactionIngestor.read("zenon-fraud-detector/data/PS_20174392719_1491204439457_log.csv", true, 100000);
+        TransactionRepository transactionRepository = new TransactionListRepository(transactions);
+        var originNameNotFound = "Cpipi";
+        transactionRepository.findByOriginName(originNameNotFound).ifPresentOrElse(IO::println, () -> IO.println("Transaction %s não encontrada".formatted(originNameNotFound)));
+        
+        var originName = "C1868032458";
+        //var originName = "C1231006815";
+
+        long startTime = System.currentTimeMillis();
+        transactionRepository.findByOriginName(originName).ifPresentOrElse(IO::println, () -> IO.println("Transaction %s não encontrada".formatted(originName)));
+        long endTime = System.currentTimeMillis();
+        System.out.println("Tempo de execução LIST: " + (endTime - startTime) + "ms");
+
+        TransactionRepository transactionRepositoryMap = new TransactionMapRepository(transactions);
+        
+        long startTimeMap = System.currentTimeMillis();
+        transactionRepositoryMap.findByOriginName(originName).ifPresentOrElse(IO::println, () -> IO.println("Transaction %s não encontrada".formatted(originName)));
+        long endTimeMap = System.currentTimeMillis();
+        System.out.println("Tempo de execução MAP: " + (endTimeMap - startTimeMap) + "ms");
+        
     }
 }
