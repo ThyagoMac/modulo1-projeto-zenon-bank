@@ -60,7 +60,7 @@ public class Main {
         IO.println("5. Fraudes por tipo: ");
         var fraudsByType = FraudAnalyzer.getFraudsByType(fraudTransactions);
         fraudsByType.forEach((type, transactionsType) -> IO.println(" - " + type + ": " + transactionsType.size()));
-        */
+        
         var transactions = TransactionIngestor.read("zenon-fraud-detector/data/PS_20174392719_1491204439457_log.csv", true, 100000);
         TransactionRepository transactionRepository = new TransactionListRepository(transactions);
         var originNameNotFound = "Cpipi";
@@ -80,6 +80,11 @@ public class Main {
         transactionRepositoryMap.findByOriginName(originName).ifPresentOrElse(IO::println, () -> IO.println("Transaction %s não encontrada".formatted(originName)));
         long endTimeMap = System.currentTimeMillis();
         System.out.println("Tempo de execução MAP: " + (endTimeMap - startTimeMap) + "ms");
-        
+        */
+
+        var report = new TransactionReport().generateReport("zenon-fraud-detector/data/PS_20174392719_1491204439457_log.csv");
+        IO.println("Total de transações: " + report.totalTransactions());
+        IO.println("Total de fraudes: " + report.totalFrauds());
+        IO.println("Total de valor transacionado: " + report.totalAmount());
     }
 }
