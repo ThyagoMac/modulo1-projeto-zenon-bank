@@ -19,4 +19,9 @@ public class TransactionListRepository implements TransactionRepository {
       .filter(transaction -> transaction.origin().name().equals(originName))
       .findFirst();
   }
+
+  @Override
+  public void save(Transaction transaction) {
+    this.transactions.add(transaction);
+  }
 }
