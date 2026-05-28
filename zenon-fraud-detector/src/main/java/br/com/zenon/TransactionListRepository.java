@@ -24,4 +24,9 @@ public class TransactionListRepository implements TransactionRepository {
   public void save(Transaction transaction) {
     this.transactions.add(transaction);
   }
+
+  @Override
+  public void saveAll(List<Transaction> transactions) {
+    this.transactions.addAll(transactions);
+  }
 }

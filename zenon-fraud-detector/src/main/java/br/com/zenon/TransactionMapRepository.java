@@ -32,4 +32,10 @@ public class TransactionMapRepository implements TransactionRepository {
   public void save(Transaction transaction) {
     this.transactions.computeIfAbsent(transaction.origin().name(), key -> transaction);
   }
+
+  @Override
+  public void saveAll(List<Transaction> transactions) {
+    this.transactions.putAll(transactions.stream()
+      .collect(Collectors.toMap(transaction -> transaction.origin().name(), Function.identity())));
+  }
 }
